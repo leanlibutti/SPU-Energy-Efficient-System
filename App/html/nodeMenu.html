@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>Nodo</title>
+  </head>
+  <body>
+    {% if node %}
+      <h2>Nodo {{ node.name }}</h2>
+      <ul>
+        <li><a href="/nodes/{{ node.name }}/interaction">Interacción</a></li>
+        <li><a href="/nodes/{{ node.name }}/alarms">Alarmas</a></li>
+        <li><a href="/nodes/{{ node.name }}/settings">Ajustes</a></li>
+        <li><a href="/nodes/{{ node.name }}/slaves">Nodos esclavos</a></li>
+      </ul>
+    {% else %}
+      <h2>El nodo {{ word }} no esta conectado.</h2>
+    {% endif %}
+  </body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Home</title>
+  </head>
+  <body>
+    <h2>Dispositivos:</h2>
+    <br>
+    {% if (devices|length) == 0 %}
+      No hay dispositivos
+    {% endif %}
+    {% for d in devices %}
+      <a href="/{{ d.ip }}/name">{{ d.ip }}</a>
+      <br>
+    {% endfor %}
+    <a href="/clear">Clear</a>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block body %}
+
+        <div class="my-2 my-md-2">
+          <div class="container">
+
+            <div class="page-header">
+              <h1 class="page-title">
+                Inicio - Aulas Disponibles
+              </h1>
+            </div>
+            <a href="/new-room"> <button type="submit" class="btn btn-primary btn-space">Crear Aula</button></a>
+            <a href="/debug-clear"> <button type="submit" class="btn btn-primary btn-space">Administrar nodos</button></a>
+            <br><br>
+
+            <div class="row row-cards">
+              {% for filas in r %}
+              <div class="col-6 col-sm-4 col-lg-2">
+                <a class="card btn btn-secondary btn-space" href="/room/{{filas[0]}}">
+                  <div class="card-body p-3 text-center">
+                    <br>
+                    <div class="h1 m-0">{{filas[1]}}</div>
+                    <div class="text-muted mb-4">Click</div>
+                  </div>
+                </a>
+              </div>
+              {% endfor %}
+            </div>              
+                   
+          
+              
+            </div>
+        </div>
+      </div>
+    </div>
+{% endblock body %}

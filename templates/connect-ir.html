@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block body %}
+
+        <div class="my-2 my-md-2">
+          <div class="container">
+            <div class="page-header">
+              <h1 class="page-title">
+                <a href="/">Aulas</a>/<a href="/room/{{room.ID_ROOM}}">Aula {{room.NAME}}</a>
+              </h1>
+            </div>
+            <div class="col-md-12">
+              <div class="card">
+                {% if groups %}
+                <div class="card-header">
+                  <h3 class="card-title" style="font-style: bold; color: black;">Conectar control infrarrojo a un grupo de actuadores</h3>
+                </div>
+                <div class="card-body">
+                  <form action="/connect-ir" method="POST">
+                    <div class="form-group">
+                      <label class="form-label">Grupos</label>
+                      <input type="hidden" name="room_id", value="{{room.ID_ROOM}}"> 
+                      <input type="hidden" name="node_id", value="{{node_id}}"> 
+                      <select class="form-control custom-select" name="group_id" required>
+                        <option value="">Elegir..</option>
+                          {% for g in groups %}
+                            <option value="{{g.ID_GROUP}}">{{g.NAME}}</option>
+                          {% endfor %}
+                      </select>                      
+                    </div>         
+                    <br>                        
+                    <div class="btn-list mt-4 text-right">
+                        <a href="/" style="padding-right: 8px;"><button type="button" class="btn btn-secondary btn-space">Cancelar</button></a>
+                      <a href=""><button type="submit" class="btn btn-primary btn-space">Conectar</button></a>
+                  </form>
+                </div>
+                {% else %}
+                  <div class="card-header">
+                    <h3 class="card-title" style="font-style: bold; color: black;">No hay grupos de actuadores a los que conectarse.</h3>
+                  </div>            
+                  <div class="card-body">
+                    Deberías crear grupos para poder controlar los dispositivos del aula.
+                    <br>
+                    <br>
+                    <a href="/new-group/{{room.ID_ROOM}}"><button type="submit" class="btn btn-primary btn-space">Crear grupo de actuadores</button></a>
+                    <a href="/room/{{room.ID_ROOM}}" style="padding-right: 8px;"><button type="button" class="btn btn-secondary btn-space">Cancelar</button></a>
+                  </div>    
+                {% endif %}
+              </div>
+            </div>    
+        </div>
+      </div>
+    </div>
+{% endblock body %}

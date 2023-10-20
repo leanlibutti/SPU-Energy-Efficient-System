@@ -1,0 +1,12 @@
+{
+	"token":"Dashboard_Test6",
+	"name":"Automatic Token for Dashboard Test6",
+	"enabled":true,
+	"allow":{
+		"Dashboard":{
+			"Test6":{"action":["ReadDashboardConfig"]}
+		},
+		"Device":{},
+		"Bucket":{}
+	}
+}

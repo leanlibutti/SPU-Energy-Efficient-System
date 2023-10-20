@@ -1,0 +1,56 @@
+USER: iii_lidi
+PASS: 12345678
+
+Device: prueba_placa
+Credential: 123456
+
+Dashboard: prueba
+Nombre: Control de Consumo Eléctrico
+Descripcion: Información de una habitación
+Widgets:
+	1 Text/Value por grupo
+	Titulo: Grupo
+	Subtitulo: {NombreDeGrupo}
+	Value: From Device prueba_placa
+	Resource: groups_state_text
+	Select Value: {NombreDeGrupo}
+	RefreshMode: Sampling Interval 3 seconds
+
+	Time Series Chart
+	Title: Ambiente
+	Subtitle: Temperatura y Humedad
+	Input: From bucket
+	Bucket: GeneralAmbientData
+	Fields: humidity, temperature
+	Timeframe: Relative
+	Period: latest 1 hour
+	Multiple Axes destildado
+
+	Time Series Chart
+	Title: Dispositivos encendidos
+	Input: From bucket
+	Bucket: ActuatorInfo
+	Fields: relays
+	Timeframe: Relative
+	Period: latest 1 hour
+	Multiple Axes destildado
+
+Bucket: {NombreDeMaestro}Groups
+Data source: From Write Call
+
+Bucket: GeneralAmbientData
+Data source: From Write Call
+
+Bucket: ActuatorInfo
+Data source: From Write Call
+
+Token: Dashboard_prueba
+Permisos:
+Type	    Resource	       Action
+Bucket	    ActuatorInfo	   ReadBucket
+Bucket	    GeneralAmbientData ReadBucket
+Dashboard	prueba	           ReadDashboardConfig
+Device	    prueba_placa	   AccessDeviceResources
+
+Token: adminToken
+Permisos: *

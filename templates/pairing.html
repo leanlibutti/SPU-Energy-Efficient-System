@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block body %}
+
+        <div class="my-2 my-md-2">
+          <div class="container">
+
+            <div class="page-header">
+              <h1 class="page-title">
+                <a href="/">Aulas</a>/Aula {{room.NAME}}
+              </h1>
+            </div>
+            <div> <!-- PARA LAS PESTAÑAS -->
+              <div>
+                <h3>Emparejando nodos</h3>
+                <h4>Por favor espere: </h4>
+                <p id="time">60 segundos restantes</p>
+              </div>
+            </div>          
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript">
+      function updateCounter() {
+        $('#time').text(time+' segundos restantes')
+        time--;
+        if(time == 0)
+          window.location.href = "/connect-slaves/{{room.ID_ROOM}}?trys=4";
+        else
+          setTimeout(updateCounter, 1000);
+      }
+      var time = 60;
+      updateCounter();
+    </script>
+
+{% endblock body %}

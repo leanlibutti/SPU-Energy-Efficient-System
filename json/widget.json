@@ -1,0 +1,27 @@
+{
+			"data":{
+				"device":{
+					"id":"TestNode",
+					"mapping":["temperature","humidity"],
+					"resource":"ambient_sensor","update":"events"
+				},
+				"source":"device"
+			},
+			"layout":{
+				"sizeX":2,
+				"sizeY":6,
+				"row":0,
+				"col":0},
+			"panel":{
+				"color":"#ffffff",
+				"subtitle":"Temperatura y humedad",
+				"title":"Datos del ambiente"},
+			"properties":{
+				"axis":true,
+				"color":{"humidity":"#354397","temperature":"#851e13"},
+				"fill":true,
+				"legend":true,
+				"multiple_axes":true,
+				"timespan":{"magnitude":"minute","value":30}},
+			"type":"chart"
+}

@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% block head %}
+<!-- JQuery -->
+<script>
+      requirejs.config({
+          baseUrl: '../'
+      });
+    </script>
+
+<script src="../../static/style/assets/js/vendors/bootstrap.bundle.min.js"></script>
+<script src="../static/style/assets/js/jquery.min.js"></script>
+{% endblock head %}
+{% block body %}
+        <div class="my-3 my-md-5">
+          <div class="my-3 my-md-5">
+          <div class="container">
+
+            <div class="page-header">
+              <h1 class="page-title">
+              <a href="/">Aulas</a><a href="/room/{{room['ID_ROOM']}}">/Aula {{room['NAME']}}</a>/Lista de Alarmas {{"Globales" if global_alarms}}</h1>
+            </div>
+
+            <a href="/new-once-alarm/{{room['ID_ROOM']}}/{{group}}"> <button type="submit" class="btn btn-primary btn-space">Crear Alarma Ocasional</button></a>
+            <a href="/new-weekly-alarm/{{room['ID_ROOM']}}/{{group}}"> <button type="submit" class="btn btn-primary btn-space">Crear Alarma Semanal</button></a>
+
+            <br>
+            <br>
+            <div class="row row-cards">
+              <div class="col-lg-12">
+                <div class="card">
+                  <table class="table card-table table-vcenter">
+
+                    <tbody>
+                      {% for filas in once_a %}
+                        <tr>
+                          <td>
+                            <b>Alarma Ocasional:</b> {{filas[1]}}
+                          </td>                      
+                          <td class="text-right">
+                            <b>Fecha:</b> {% print(filas[2].replace("-","/",3)) %}
+                          </td>
+                          <td class="text-right">
+                            <b>Desde:</b> {{filas[3]}}:{{filas[4]}} <br>
+                            <b>Hasta:</b> {{filas[6]}}:{{filas[7]}}
+                            <!--<b>{{filas[0]}}</b>-->
+                          </td>
+                         {% if global_alarms %}
+                         <td class="text-right icon"><a href="{{room['ID_ROOM']}}?id={{filas[0]}}&borrar=1"><i class="fe fe-trash" style="text-align: center;"></i></a></td>
+                         {% else %}
+                         <td class="text-right icon"><a href="{{group}}?id={{filas[0]}}&borrar=1"><i class="fe fe-trash" style="text-align: center;"></i></a></td>
+                         {% endif %}
+                        </tr>
+                      {% endfor %}
+                      {% for filas in weekly_a %}
+                        <tr>
+                          <td>
+                            <b>Alarma Semanal:</b> {{filas[1]}}
+                          </td>                      
+                          <td class="text-right">
+                            <b>Día:</b> 
+                            {% if filas[4] == 1 %}
+                              Lunes
+                            {% endif %}
+                            {% if filas[4] == 2 %}
+                              Martes
+                            {% endif %}
+                            {% if filas[4] == 3 %}
+                              Miércoles
+                            {% endif %}
+                            {% if filas[4] == 4 %}
+                              Jueves
+                            {% endif %}
+                            {% if filas[4] == 5 %}
+                              Viernes
+                            {% endif %}
+                            {% if filas[4] == 6 %}
+                              Sábado
+                            {% endif %}
+                            {% if filas[4] == 7 %}
+                              Domingo
+                            {% endif %}
+                          </td>
+                          <td class="text-right">
+                            <b>Desde: </b> {{filas[2]}}:{{filas[5]}} <br><b>Hasta: </b>   {{filas[3]}}:{{filas[6]}}
+                          </td>
+                         <!-- <td class="text-right icon"><a href="" data-toggle="modal" data-target="#ModalCenter" data-link="{{filas[7]}}?id={{filas[0]}}&borrar=2"><i class="fe fe-trash" style="text-align: center;"></i></a></td> -->
+                         {% if global_alarms %}
+                         <td class="text-right icon"><a href="{{room['ID_ROOM']}}?id={{filas[0]}}&borrar=2"><i class="fe fe-trash" style="text-align: center;"></i></a></td>
+                         {% else %}
+                          <td class="text-right icon"><a href="{{group}}?id={{filas[0]}}&borrar=2"><i class="fe fe-trash" style="text-align: center;"></i></a></td>
+                          {% endif %}
+                        </tr>
+                      {% endfor %}
+                  </tbody>
+                  <!-- Modal -->
+                    <div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="ModalLongTitle">Eliminar alarma</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            ¿Estás seguro que deseas eliminar la alarma?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <a id="modal-delete" href="">
+                            <button type="submit" class="btn btn-primary">Eliminar</button>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- END Button trigger modal -->
+
+                    <script>
+                      $('#ModalCenter').on('show.bs.modal', function (event) {
+                      var button = $(event.relatedTarget) // Button that triggered the modal
+                      var recipient = button.data('link') // Extract info from data-* attributes
+                      var modal = $(this)
+                      modal.find('#modal-delete').attr("href", recipient)
+                    })
+                    </script>
+                            
+                </table>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock body %}

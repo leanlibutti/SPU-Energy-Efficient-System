@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block body %}
+
+        <div class="my-3 my-md-5">
+          <div class="container" >
+              <div class="col-md-12">
+
+
+            <div class="page-header">
+              <h1 class="page-title">
+                <a href="/">Aulas</a><a href="/room/{{room['ID_ROOM']}}">/Aula {{room['NAME']}}</a>/<a href="/alarm-list/{{room['ID_ROOM']}}">Lista de Alarmas</a>
+              </h1>
+            </div>
+
+
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title" style="font-style: bold; color: black;">
+                       Crear Nueva Alarma Semanal
+                    </h3>
+                  </div>
+                  <div class="card-body">
+                    <form action="/new-weekly-alarm/{{room['ID_ROOM']}}/{{ group }}" method="POST">
+                      <div class="form-group">
+                        <label class="form-label">Nombre</label>
+                        <input name="name" class="form-control" type="text" required="true">
+                      </div>
+
+                      <div class="form-group">
+                        <label class="form-label">Día de la Semana</label>
+                        <select name="day" class="form-control custom-select" style="width: 10%;" required="true">
+                              <option selected="selected" value=""> Día </option>
+                              <option value="1">Lunes</option>
+                              <option value="2">Martes</option>
+                              <option value="3">Miércoles</option>
+                              <option value="4">Jueves</option>
+                              <option value="5">Viernes</option>
+                              <option value="6">Sábado</option>
+                              <option value="7">Domingo</option>
+                            </select>
+                      </div>
+
+                       <div class="form-group">
+                        <label class="form-label">Hora de Comienzo</label>
+                        <input type="time" id="time_i" name="time_i"
+                        min="1:00" max="23:00" required>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="form-label">Hora de Finalización</label>
+                        <input type="time" id="time_f" name="time_f"
+                        min="1:00" max="23:00" required>
+                      </div>
+                                              
+                      <br>
+                        
+                      <div class="btn-list mt-4 text-right">
+                          <a href="/" style="padding-right: 8px;"><button type="button" class="btn btn-secondary btn-space">Cancelar</button></a>
+                        <a href=""><button type="submit" class="btn btn-primary btn-space">Crear Alarma</button></a>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock body %}

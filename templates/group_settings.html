@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block body %}
+        <div class="my-2 my-md-2">
+          <div class="container">
+
+            <div class="page-header">
+              <h1 class="page-title">
+                <a href="/">Aulas</a>/<a href="/room/{{room.ID_ROOM}}">Aula {{room.NAME}}</a>/Grupo {{group.NAME}}
+              </h1>
+            </div>
+            <h2 style="display: inline; margin-right: 10px;">Actuadores</h2>
+            <a href="/group-connect/{{group.ID_GROUP}}" style="position: relative; top:-5px;"> <button type="submit" class="btn btn-primary btn-space">Agregar</button></a>
+            <br><br>
+            <div> <!-- PARA LAS PESTAÑAS -->
+              <div>
+                <h4>Relays</h4>
+                {% if relays|length == 0 %}
+                  No hay relays conectados.
+                {% endif%}
+                <br>
+                {% for r in relays %}
+                  Relay {{r.NUMBER}} en 
+                  {{ 'maestro' if r.M_E == 'M' else 'esclavo' }} 
+                  {{r.NODE_NAME}}
+                  <a href="/disconnect-relay?id={{r.ID_RELAY}}&room={{room.ID_ROOM}}">Desconectar</a><br>
+                {% endfor%}
+                <br>
+                <h4>Controladores IR</h4>
+                {% if ircontrols|length == 0 %}
+                  No hay controladores infrarrojos conectados.
+                {% endif %}
+                {% for c in ircontrols %}
+                  Controlador en {{ 'maestro' if c.M_E == 'M' else 'esclavo' }} 
+                  {{c.NODE_NAME}}
+                  <a href="/disconnect-ir?room={{room.ID_ROOM}}&node={{c.ID_NODE}}">Desconectar</a><br>
+                {% endfor %}
+                <br>
+              </div>
+            </div>       
+            <br>
+            <div class="form-group">
+              <h2>Sensores</h2>
+              <form method="post" action="/groupsettings/{{group.ID_GROUP}}">
+                <input type="hidden" name="group_id" value="{{group.ID_GROUP}}">
+                <h4 style="display: inline; margin-right: 5px;"> Sensor de movimiento </h4>
+                <label id="pir_enabled" class="custom-switch" style="position: relative; top:4px;">
+                  {% if group.PIR_EFFECT == 'on' %}
+                  <input id="pir_enabled_check" name="pir_enable" class="custom-switch-input" type="checkbox" checked>
+                  {% else %}
+                  <input id="pir_enabled_check" name="pir_enable" class="custom-switch-input" type="checkbox">
+                  {% endif %}
+                  <span class="custom-switch-indicator"></span>
+                  <span class="custom-switch-description">Desactivado / Activado</span>
+                </label>
+                <br>
+                <br>
+                <div id="pir_config" style="display: none;">
+                  <h5>Tiempo que se espera por movimiento</h5> 
+                  <div>
+                    <label>
+                      Horas&nbsp
+                      <input style="width: 60px;" type="number" name="time_hours" value="{{pir_hours}}">&nbsp
+                    </label>
+                    <label>
+                      Minutos &nbsp
+                      <input style="width: 60px;" type="number" name="time_minutes" value="{{pir_minutes}}">&nbsp
+                    </label>
+                    <label>
+                      Segundos&nbsp
+                      <input style="width: 60px;" type="number" name="time_seconds" value="{{pir_seconds}}">&nbsp
+                    </label>
+                  </div>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary btn-space" style="display: inline;">Guardar cambios del sensor</button>
+              </form>
+            </div>
+              <br>
+              {% if group.PIR_EFFECT == 'on'%}
+              <br>
+              <form method="post" action="/change_inactivity_time/{{group.ID_NODE}}">
+                <h4>Tiempo de inactividad del sensor de movimiento</h4>
+                <p>Este es el tiempo en que se desactiva el sensor luego de prender algún grupo,<br> con el objetivo de que no se detecte movimiento como resultado del encendido.</p>
+                <h5><b>Este tiempo es global, afecta a todos los grupos del aula.</b></h5>
+                <input type="number" name="inac_time" value="{{inactivity_time}}" min="0">
+                Segundos
+                <input type="hidden" name="group_id" value="{{group.ID_GROUP}}">
+                <br><br>
+                <input type="submit" class="btn btn-primary btn-space" value="Guardar tiempo de inactividad">
+              </form>
+              {% endif %}
+              <br>
+              <h3>Eliminar grupo</h3>
+              <h4>Esta acción no puede ser revertida.</h4>
+              <a href="/delete-group?group={{group.ID_GROUP}}"> <button type="submit" class="btn btn-primary btn-space">Eliminar grupo</button></a>
+            </div>
+        </div>
+      </div>
+    </div>
+
+        <script type="text/javascript" src='../static/js/group_settings.js'></script>
+{% endblock body %}

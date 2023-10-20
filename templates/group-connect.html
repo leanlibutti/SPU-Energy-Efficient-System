@@ -1,0 +1,51 @@
+
+{% extends "base.html"%}
+{% block body %}
+
+        <div class="my-3 my-md-5">
+          <div class="container" >
+              <div class="col-md-12">
+
+            <div class="page-header">
+              <h1 class="page-title">
+              <a href="/">Aulas</a>/<a href="/room/{{room.ID_ROOM}}">Aula {{room.NAME}}</a>/<a href="/groupsettings/{{group.ID_GROUP}}">Grupo {{group.NAME}}</a></h1>
+            </div>
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title" style="font-style: bold; color: black;">
+                    Agregar Actuador
+                  </h3>
+                </div>
+
+                <div class="card-body">
+                  <form action="/group-connect/{{group.ID_GROUP}}" method="POST">
+                    <div class="form-group">
+                      <label class="form-label">Actuadores disponibles</label>
+                      <input type="hidden" name="relay_id", value="{{relay_id}}">
+                      <input type="hidden" name="room_id", value="{{room_id}}"> 
+                      <select class="form-control custom-select" name="actuator" required>
+                        <option value="">Elegir..</option>
+                        {% for r in relays %}
+                        <option value="relay-{{r.ID_RELAY}}">Relay {{r.NUMBER}} en {{ 'maestro' if r.M_E == 'M' else 'esclavo' }} {{r.NODE_NAME}}</option>
+                        {% endfor %}
+                        {% for ir in ircontrols %}
+                        <option value="ircontrol-{{ir.ID_NODE}}">Controlador IR en esclavo {{ir.NODE_NAME}}</option>
+                        {% endfor %}
+                      </select>                      
+                    </div>         
+                    <br>                        
+                    <div class="btn-list mt-4 text-right">
+                        <a href="/" style="padding-right: 8px;"><button type="button" class="btn btn-secondary btn-space">Cancelar</button></a>
+                      <a href=""><button type="submit" class="btn btn-primary btn-space">Conectar</button></a>
+                      </div>
+                  </form>
+                </div>
+
+
+              </div>
+            </div>    
+        </div>
+      </div>
+
+{% endblock body %}
+    

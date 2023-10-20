@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block body %}
+        <div class="my-3 my-md-5">
+          <div class="container" >
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title" style="font-style: bold; color: black;">Administrar nodos</h3>
+                  </div>
+                  <div class="card-body">
+                    {% if disconnected %}
+                      <h3>Nodo desconectado antes de enviar el mensaje.</h3>
+                    {% endif %}
+                    {% if sent %}
+                      <h3>Enviado.</h3>
+                    {% endif %}
+                    {% for node in nodes%}
+                    <h4>Nodo {{ node.name }}</h4>
+                    <a href="/clear/{{node.name}}"> Limpiar EEPROM</a>
+                    <a href="/reset/{{node.name}}"> Resetear</a>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock body %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block body %}
+
+        <div class="my-3 my-md-5">
+          <div class="container" >
+              <div class="col-md-12">
+
+              <div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: {{'block' if room_available else 'none'}}">
+  El nombre del aula ya está en uso.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    
+  </button>
+</div>
+
+
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title" style="font-style: bold; color: black;">Crear Nueva Aula</h3>
+                  </div>
+                  <div class="card-body">
+                    <form action="new-room" method="POST">
+                      <div class="form-group">
+                        <label class="form-label">Nombre</label>
+                        <input name="room_n" class="form-control" type="text" maxlength="7"required="true">
+                      </div>
+                      <div class="form-group">
+                        <label class="form-label">Nodos libres</label> 
+                        {% if nodes %}                    
+                        <select class="form-control custom-select" name="node" required>
+                          {% for n in nodes %}
+                          <option value="{{n.ID_NODE}}">Nodo {{n.NAME}}</option>
+                           {% endfor %}
+                        </select>
+                        {% else %}
+                        <select class="form-control custom-select" name="node" required>
+                          <option value=""> No hay nodos libres, asegurese de conectar el nodo antes de intentar crear el aula.</option>
+                        </select>
+                         
+                        {% endif %}                   
+                      </div>
+                                      
+                      <br>                        
+                      <div class="btn-list mt-4 text-right">
+                          <a href="/" style="padding-right: 8px;"><button type="button" class="btn btn-secondary btn-space">Cancelar</button></a>
+                        <a href=""><button type="submit" class="btn btn-primary btn-space">Crear Aula</button></a>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock body %}

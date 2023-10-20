@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nodo</title>
+  </head>
+  <body>
+    {% if node %}
+      <h2>Nodo {{ node.name }}: Interacción</h2>
+      <div>
+        <h3>Dispositivos</h3>
+        <ul>
+        {% for g in groups %}
+          <li>{{ g.name }}, {{ g.state }}<a href="{{ g.target }}">{{ g.action }}</a></li>
+        {% endfor %}
+        </ul>
+      </div>
+    {% else %}
+      <h2>El nodo {{ word }} no esta conectado.</h2>
+    {% endif %}
+  </body>
+</html>

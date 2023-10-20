@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Language" content="en" />
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="theme-color" content="#710100">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <script type="text/javascript" src='../static/js/jquery-3.3.1.min.js'></script>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" type="image/x-icon" href="./favicon.ico" />
+    <script type="text/javascript"> var roomId = '{{room_id}}'; </script>
+    <script type="text/javascript" src='../static/js/index.js'></script>
+    
+    <script src="../../static/style/assets/js/vendors/jquery-3.2.1.min.js"></script>
+    <script src="../../static/style/assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <!--<script src="../static/style/assets/js/jquery.min.js"></script>-->
+    <!-- Generated: 2018-04-16 09:29:05 +0200 -->
+    <title>Aulas</title>
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext">
+    <script src="../static/style/assets/js/require.min.js"></script>
+    <script>
+      requirejs.config({
+          baseUrl: '.'
+      });
+    </script>-->
+    <link rel="stylesheet" type="text/css" href="/static/style/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/style/assets/css/google-fonts.css">
+    <!-- Dashboard Core -->
+    <link href="../static/style/assets/css/dashboard.css" rel="stylesheet" />
+    <script src="../static/style/assets/js/dashboard.js"></script>
+  </head>
+  <body class="">
+    <div class="page">
+      <div class="page-main">
+        <div class="header py-4">
+          <div class="container">
+            <div class="d-flex">
+              <a class="header-brand" href="/">
+                <div style="font-size:3vw;" > <img src="/static/demo/brand/facu.jpg" class="header-brand-img" alt="tabler logo">
+                Control de Consumo Eléctrico</div>
+              </a>
+              <div class="d-flex order-lg-2 ml-auto">
+                
+                <div class="dropdown">
+                  <a href="#" class="nav-link pr-0 leading-none" data-toggle="dropdown">
+                    <span class="avatar" style="background-image: url(/static/demo/brand/user.png)"></span>
+                    <span class="ml-2 d-none d-lg-block">
+                      <span class="text-default">Usuario </span>
+                      <small class="text-muted d-block mt-1">Administrador</small>
+                    </span>
+                  </a>
+                  <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                    <a class="dropdown-item" href="#">
+                      <i class="dropdown-icon fe fe-settings"></i> Configuración
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/logout">
+                      <i class="dropdown-icon fe fe-log-out"></i> Cerrar Sesión
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <a href="#" class="header-toggler d-lg-none ml-3 ml-lg-0" data-toggle="collapse" data-target="#headerMenuCollapse">
+                <span class="header-toggler-icon"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+        
+
+        <div class="header collapse d-lg-flex p-0" id="headerMenuCollapse">
+          <div class="container">
+            <div class="row align-items-center">
+              
+              <div class="col-lg order-lg-first">
+                <ul class="nav nav-tabs border-0 flex-column flex-lg-row">
+                  <li class="nav-item">
+                    <a href="/" class="nav-link"><i class="fe fe-home"></i> Inicio</a>
+                  </li>
+                  <li class="nav-item" onclick="openTab('Grupos')">
+                    <a  class="nav-link"> Grupos</a>
+                  </li>
+                  <li class="nav-item" onclick="openTab('Esclavos')">
+                    <a  class="nav-link"> Nodos</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="my-2 my-md-2">
+          <div class="container">
+
+<div class="alert alert-danger alert-dismissible fade show" role="alert" style="display: {{'block' if nodeDisconnected else 'none'}}">
+  El nodo maestro no está conectado a la aplicación.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    
+  </button>
+</div>
+
+            <div class="page-header">
+              <h1 class="page-title">
+              <a  href="/">Aulas</a>/Aula {{room_name}}</h1>
+
+              <a style="margin-left:10px; color: #bf2b39; cursor: pointer;" data-toggle="modal" data-target="#ModalCenter" data-link="{{room_id}}?id={{room_id}}"><i class="fe fe-trash" style="text-align: center;"></i></a>
+
+            </div>
+
+            <!-- Modal -->
+                    <div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="ModalLongTitle">Eliminar producto</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            ¿Esta seguro que desea eliminar el aula? <br> DEBERA LIMPIAR LA EEPROM DE TODOS LOS DISPOSITIVOS
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                            <a id="modal-delete" href="{{room_id}}?id={{room_id}}">
+                            <button type="submit" class="btn btn-primary">Eliminar</button>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- END Button trigger modal -->
+
+
+
+
+            <div> <!-- PARA LAS PESTAÑAS -->
+              <div id="Grupos" class="w3-container tab">
+							  {% if ambient_data %}
+							  <div id="ambient-data">
+                  {% if ambient_data_read %}
+								  <b>Temperatura: {{ ambient_data.temperature }}</b>
+								  <b>Humedad: {{ ambient_data.humidity }}</b>
+                  {% else %}
+                  <b> Falló la lectura de temperatura y humedad. </b>
+                  {% endif %}
+							  </div>
+							  {% endif %}
+                <h2>Grupos</h2>
+                {% if master %}
+                <a href="/new-group/{{room_id}}"> <button type="submit" class="btn btn-primary btn-space">Crear grupo de actuadores</button></a>
+
+                <a href="/global-alarm-list/{{room_id}}"> <button type="submit" class="btn btn-primary btn-space">Alarmas globales</button></a>
+                <br><br>
+                {% endif %}
+                {% if groups %}
+                  {% for group in groups %}
+                    <div id="group-{{group.ID_GROUP}}">
+                      <b>Grupo {{group.NAME}}</b>
+                      &nbsp
+                      {% if group.ON_OFF == 'on' %}
+                        Prendido
+                        <a href='/turnoff?room={{room_id}}&group={{group.ID_GROUP}}'>Apagar</a>
+                      {% else %}
+                        Apagado
+                        <a href='/turnon?room={{room_id}}&group={{group.ID_GROUP}}'>Prender</a>
+                      {% endif %}
+                      &nbsp
+                      <i class="fa fa-gear"></i><a href="/groupsettings/{{group.ID_GROUP}}">  Configuración</a> &nbsp
+                      <i class="fe fe-clock">&nbsp</i><a href="/alarm-list/{{group.ID_GROUP}}">Alarmas</a>
+                      <br>
+                      <br>
+                    </div>
+                  {% endfor %}
+                  <br>
+                {% endif %}
+              </div>
+              <div id="Esclavos" class="w3-container tab" style="display:none">
+                <h2>Nodos</h2>
+                  {% if master %}
+                    <h4>Maestro {{master.NAME}}</h4>
+                    <a href="/record-ir?room={{room_id}}">Grabar comando IR</a><br>
+                    <a href="/transmit-ir?room={{room_id}}">Trasmitir comando IR</a><br>
+                    {% if master.SENSOR == 'true' %}
+                      Sensor de temperatura y humedad conectado.
+                      <a href="/disconnect-temp-sensor?room={{room_id}}&node={{master.ID_NODE}}">Desconectar</a><br>
+                      <script type="text/javascript">
+                        var tempSensorConnected = true;
+                      </script>
+                    {% else %}
+                      <a href="/connect-temp-sensor?room={{room_id}}&node={{master.ID_NODE}}" id="connectTemp">Conectar sensor de temperatura y humedad</a><br>
+                      <script type="text/javascript">
+                        var tempSensorConnected = false;
+                      </script>
+                    {% endif %}
+                    {% if master.PIR == 'true' %}
+                      Sensor de movimiento conectado.
+                      <a href="/disconnect-movement-sensor?room={{room_id}}&node={{master.ID_NODE}}">Desconectar</a><br>
+                      <script type="text/javascript">
+                        var movementSensorConnected = true;
+                      </script>
+                    {% else %}
+                      <a href="/connect-movement-sensor?room={{room_id}}&node={{master.ID_NODE}}" id="connectPir">Conectar sensor de movimiento</a><br>
+                      <script type="text/javascript">
+                        var movementSensorConnected = false;
+                      </script>
+                    {% endif %}
+                    {% for relay in master_relays %}
+                      Relay {{relay.NUMBER}}
+                      {% if relay.ID_GROUP %}
+                        conectado a grupo {{relay.NAME}}
+                        <a href="/disconnect-relay?id={{relay.ID_RELAY}}&room={{room_id}}&node={{master.ID_NODE}}">Desconectar</a>
+                      {% else %}
+                        Desconectado
+                        <a href="/connect-relay?id={{relay.ID_RELAY}}&room={{room_id}}&node={{master.ID_NODE}}">Conectar</a>
+                      {% endif %}
+                      <br>
+                    {% endfor %}
+                    <br>
+                    {% for slave in slaves %}
+                      <h4 style="display: inline;">Esclavo {{slave.NAME}}</h4>
+                      <a style="font-size: 12px;" class="edit_slave" href="/edit_slave?node={{slave.ID_NODE}}">Editar</a>
+                      <br>
+                      {% if slave.SENSOR == 'true' %}
+                        Sensor de temperatura y humedad conectado.
+                        <a href="/disconnect-temp-sensor?room={{room_id}}&node={{slave.ID_NODE}}">Desconectar</a><br>
+                      {% else %}
+                        <a href="/connect-temp-sensor?room={{room_id}}&node={{slave.ID_NODE}}">Conectar sensor de temperatura y humedad</a><br>
+                      {% endif %}
+                      {% if slave.PIR == 'true' %}
+                        Sensor de movimiento conectado.
+                        <a href="/disconnect-movement-sensor?room={{room_id}}&node={{slave.ID_NODE}}">Desconectar</a><br>
+                      {% else %}
+                        <a href="/connect-movement-sensor?room={{room_id}}&node={{slave.ID_NODE}}">Conectar sensor de movimiento</a><br>
+                      {% endif %}
+                      {% if slave.ircontrol %}
+                        Control infrarrojo Conectado a Grupo {{slave.ircontrol.group_name}}. 
+                        <a href="/disconnect-ir?room={{room_id}}&node={{slave.ID_NODE}}">Desconectar</a>
+                      {% else %}
+                        Control infrarrojo Desconectado.
+                        <a href="/connect-ir?room={{room_id}}&node={{slave.ID_NODE}}">Conectar</a>
+                      {% endif %}
+                      <br>
+                      {% for relay in slave.relays %}
+                        Relay {{relay.NUMBER}}
+                        {% if relay.ID_GROUP %}
+                          conectado a grupo {{relay.NAME}}
+                          <a href="/disconnect-relay?id={{relay.ID_RELAY}}&room={{room_id}}&node={{slave.ID_NODE}}">Desconectar</a>
+                        <br>
+                        {% else %}
+                          Desconectado
+                          <a href="/connect-relay?id={{relay.ID_RELAY}}&room={{room_id}}&node={{slave.ID_NODE}}">Conectar</a>
+                        <br>
+                        {% endif %}
+                      {% endfor %}
+                      <br>
+                    {% endfor %}
+                    <br>
+                    <a href="/pair_nodes/{{room_id}}"> <button type="submit" class="btn btn-primary btn-space">Emparejar nodos</button></a>
+                  {% else %}
+                    Esta aula no tiene dispositivos instalados.
+                  {% endif %}
+              </div>
+            </div>          
+          </div>
+        </div>
+      </div>          
+    </div>
+  </div>
+
+<script>
+function openTab(tabName) {
+  var i;
+  var x = document.getElementsByClassName("tab");
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+  }
+  document.getElementById(tabName).style.display = "block";  
+}
+</script>
+
+
+
+                    <script>
+                      $('#ModalCenter').on('show.bs.modal', function (event) {
+                      var button = $(event.relatedTarget) // Button that triggered the modal
+                      var recipient = button.data('link') // Extract info from data-* attributes
+                      var modal = $(this)
+                      modal.find('#modal-delete').attr("href", recipient)
+                    })
+                    </script>
+              
+<footer class="footer">
+  <div class="container">
+    <div class="row align-items-center flex-row-reverse">
+      <div class="col-auto ml-lg-auto">
+        <div class="row align-items-center">
+          <div class="col-auto">
+            <ul class="list-inline list-inline-dots mb-0">
+              <li> III-Lidi</li>
+              <li> </li>
+              </ul>
+              </div>
+            <div class="col-auto"></div>
+        </div>
+      </div>
+      <div>Universidad Nacional de La Plata </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
+

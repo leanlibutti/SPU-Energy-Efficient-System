@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block body %}
+        <div class="my-3 my-md-5">
+          <div class="container" >
+            <div class="page-header">
+              <h1 class="page-title">
+                <a href="/">Aulas</a>/<a href="/room/{{room.ID_ROOM}}">Aula {{room.NAME}}</a>
+              </h1>
+            </div>
+              <div class="col-md-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title" style="font-style: bold; color: black;">Crear Nuevo Grupo de Actuadores</h3>
+                  </div>
+                  <div class="card-body">
+                    <form action="/new-group/{{room.ID_ROOM}}" method="POST">
+                      <div class="form-group">
+                        <label class="form-label">Nombre</label>
+                        <input name="group_n" class="form-control" type="text" required="true">
+                      </div>
+
+                      <div class="form-group">
+                        <div class="form-label">Sensor de presencia</div>
+                        <label class="custom-switch"> 
+                        <input name="pir_effect" class="custom-switch-input" type="checkbox">
+                          <span class="custom-switch-indicator"></span>
+                          <span class="custom-switch-description">Desactivado / Activado</span>
+                        </label>
+                      </div> 
+
+                      <div class="form-group">
+                        <label class="form-label">Tiempo de Sensor de prescencia</label>
+                        <input name="pir_time" class="form-control" type="number" min="0" value="0" required="true">
+                      </div> 
+                                      
+                      <br>                        
+                      <div class="btn-list mt-4 text-right">
+                          <a href="/" style="padding-right: 8px;"><button type="button" class="btn btn-secondary btn-space">Cancelar</button></a>
+                        <a href=""><button type="submit" class="btn btn-primary btn-space">Crear Grupo</button></a>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+{% endblock body %}
