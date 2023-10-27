@@ -123,7 +123,7 @@ protected:
             /**
              * Check reading timeout
              */
-            if(read<=0 && abs(millis()-start)>=DEFAULT_READ_TIMEOUT){
+            if(read<=0 && (millis()-start)>=DEFAULT_READ_TIMEOUT){
                 #ifdef _DEBUG_
                 THINGER_DEBUG("_SOCKET", "Cannot read from socket!");
                 #endif

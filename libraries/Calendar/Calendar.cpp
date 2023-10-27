@@ -161,6 +161,9 @@ char* AlarmCalendar::days(int d){
       break;
     case 7:
       return "Domingo";
+      break;
+    default: 
+      return "Error";
       break;    
   }  
 }  
