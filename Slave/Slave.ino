@@ -32,10 +32,10 @@ DHT dht(TEMPERATURE_PIN, DHTTYPE);
 #define RESEND_TIME 5
 
 // Variables de la conexion
-IPAddress masterIp(192, 168, 4, 1); // Ip del nodo maestro
+IPAddress masterIp(192, 168, 0, 199); // Ip del nodo maestro
 IPAddress nodeIp; // Ip del esclavo, otorgada por el maestro
 IPAddress subnet(255, 255, 255, 0);
-IPAddress gateway(192, 168, 4, 1);
+IPAddress gateway(192, 168, 0, 1);
 
 WiFiUDP udp;
 
